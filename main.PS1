@@ -17,3 +17,6 @@ PS C:\Users\ryan\powershell-history-log> $result[0]
 1
 PS C:\Users\ryan\powershell-history-log> $result[1]
 #>
+foreach ($row in $result) {
+    Write-Host $row.Column1
+}
