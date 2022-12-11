@@ -1,6 +1,6 @@
 # sqlcmd -S "$(hostname)\SQLEXPRESS" -E
 $server = "$(hostname)\SQLEXPRESS"
-$result = Invoke-Sqlcmd -ServerInstance $server -Query "SELECT 1 UNION ALL SELECT 2"
+$result = Invoke-Sqlcmd -ServerInstance $server -Query "SELECT 1 a UNION ALL SELECT 2 a"
 <#
 PS C:\Users\ryan\powershell-history-log> $result.GetType()
 
@@ -18,7 +18,17 @@ PS C:\Users\ryan\powershell-history-log> $result[0]
 PS C:\Users\ryan\powershell-history-log> $result[1]
 #>
 foreach ($row in $result) {
-    Write-Host $row.Column1
+    Write-Host $row.a
+    # NOTE if you didnt give it a column name, it will be the column name will be 'Column1':
+    <#
+    1> select 1
+    2> go
+
+    -----------
+            1
+
+    (1 rows affected)
+    #>
 }
 
 <# INSPECT INTO OBJECT

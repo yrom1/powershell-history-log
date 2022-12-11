@@ -17,5 +17,16 @@ $row.ID = 2
 $row.Name = "Jane"
 $table.Rows.Add($row)
 
+$row.Item("ID") = 42
+
+<#
+PS C:\Users\ryan\powershell-history-log> $row[0]
+42
+PS C:\Users\ryan\powershell-history-log> $row.Item("ID")
+42
+PS C:\Users\ryan\powershell-history-log> $row.ID
+42
+#>
+
 # Print the data in the DataTable
 $table | Format-Table
