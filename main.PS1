@@ -1,6 +1,11 @@
 # sqlcmd -S "$(hostname)\SQLEXPRESS" -E
 $server = "$(hostname)\SQLEXPRESS"
-$result = Invoke-Sqlcmd -ServerInstance $server -Query "SELECT 1 a UNION ALL SELECT 2 a"
+# $result = Invoke-Sqlcmd -ServerInstance $server -Query "SELECT 1 a UNION ALL SELECT 2 a"
+Invoke-Sqlcmd -ServerInstance $server -Query "DROP TABLE IF EXISTS history"
+Invoke-Sqlcmd -ServerInstance $server -Query "CREATE TABLE IF NOT EXISTS history (id int, command varchar(255))"
+# Invoke-Sqlcmd -ServerInstance $server -Query "TRUNCATE TABLE history"
+# Invoke-Sqlcmd -ServerInstance DESKTOP-PCC2R8U\SQLEXPRESS -Query "INSERT INTO history(id, command) VALUES (1, 'x')"
+$history = Get-History
 <#
 PS C:\Users\ryan\powershell-history-log> $result.GetType()
 
@@ -17,8 +22,29 @@ PS C:\Users\ryan\powershell-history-log> $result[0]
 1
 PS C:\Users\ryan\powershell-history-log> $result[1]
 #>
-foreach ($row in $result) {
-    Write-Host $row.a
+foreach ($command in $history) {
+
+    # Write-Host $command.Id
+    # Write-Host $command.CommandLine
+    # Write-Host ---
+    <# NOTE this is case insensitive!
+    PS C:\Users\ryan\powershell-history-log> 'Trees' -eq 'trees' # ceq for case sensitive
+    True
+    PS C:\Users\ryan\powershell-history-log> $row
+
+    ID Name
+    -- ----
+    2 Jane
+
+
+    PS C:\Users\ryan\powershell-history-log> $ROW
+
+    ID Name
+    -- ----
+    2 Jane
+
+
+    #>
     # NOTE if you didnt give it a column name, it will be the column name will be 'Column1':
     <#
     1> select 1
