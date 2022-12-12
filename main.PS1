@@ -1,3 +1,6 @@
+# https://powershellstation.com/2016/01/05/invoke-sqlcmd-considered-harmful/
+# invoke-sqlcmd-considered-harmful
+
 # sqlcmd -S "$(hostname)\SQLEXPRESS" -E
 $server = "$(hostname)\SQLEXPRESS"
 # $result = Invoke-Sqlcmd -ServerInstance $server -Query "SELECT 1 a UNION ALL SELECT 2 a"
